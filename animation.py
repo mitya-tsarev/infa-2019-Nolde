@@ -80,20 +80,6 @@ enumerate(xf5)
 enumerate(yf5)
 canvasSize(1000, 500)
 windowSize(1000, 500)
-penColor(255, 204, 153)
-brushColor(255, 204, 153)
-rectangle(0, 0, 1000, 100)
-penColor(255, 229, 204)
-brushColor(255, 229, 204)
-polygon([(0, 100), (1000, 100), (1000, 215), (0, 200)])
-penColor(255, 255, 153)
-brushColor(255, 255, 153)
-polygon([(0, 200), (1000, 215), (1000, 300), (0, 350)])
-penColor(188, 143, 143)
-brushColor(188, 143, 143)
-polygon([(0, 350), (1000, 300), (1000, 500), (0, 500)])
-penColor(225, 153, 51)
-brushColor(255, 153, 51)
 
 back_mountain = [(1000, 160), (10, 225), (20, 185), (xf1[0], yf1[0]), (xf1[1], yf1[1]), (xf1[2], yf1[2]),
                  (xf1[3], yf1[4]),
@@ -121,32 +107,53 @@ middle_mountain = [(1000, 300), (0, 350), (0, 245), (5, 245), (25, 265), (xf3[0]
                    (xf4[11], yf4[11]),
                    (750, 250), (800, 210), (835, 235), (860, 205), (930, 210), (1000, 160)]
 
-draw_rotated_vector_list(back_mountain, 500, 100, 0.13)
-
-penColor(153, 0, 0)
-brushColor(153, 0, 0)
-
-draw_rotated_vector_list(middle_mountain, 500, 300, 0.13)
 
 penColor(255, 255, 0)
 brushColor(255, 255, 0)
 circle(475, 95, 50)
-penColor(51, 0, 51)
-brushColor(51, 0, 51)
-polygon([(1000, 500), (0, 500), (0, 240), (100, 265), (200, 365), (xf5[0], yf5[0]), (xf5[1], yf5[1]), (xf5[2], yf5[2]),
+
+
+def shift_birds():
+    penColor(255, 204, 153)
+    brushColor(255, 204, 153)
+    rectangle(0, 0, 1000, 100)
+    penColor(255, 229, 204)
+    brushColor(255, 229, 204)
+    polygon([(0, 100), (1000, 100), (1000, 215), (0, 200)])
+    penColor(255, 255, 153)
+    brushColor(255, 255, 153)
+    polygon([(0, 200), (1000, 215), (1000, 300), (0, 350)])
+    penColor(188, 143, 143)
+    brushColor(188, 143, 143)
+    polygon([(0, 350), (1000, 300), (1000, 500), (0, 500)])
+
+    penColor(225, 153, 51)
+    brushColor(255, 153, 51)
+    draw_rotated_vector_list(back_mountain, 500, 100, 0.13)
+    penColor(153, 0, 0)
+    brushColor(153, 0, 0)
+    draw_rotated_vector_list(middle_mountain, 500, 300, 0.13)
+    penColor(51, 0, 51)
+    brushColor(51, 0, 51)
+    polygon(
+        [(1000, 500), (0, 500), (0, 240), (100, 265), (200, 365), (xf5[0], yf5[0]), (xf5[1], yf5[1]), (xf5[2], yf5[2]),
          (xf5[3], yf5[3]), (xf5[4], yf5[4]), (xf5[5], yf5[5]), (xf5[6], yf5[6]), (xf5[7], yf5[7]), (xf5[8], yf5[8]),
          (xf5[9], yf5[9]), (650, 435), (675, 450), (xf6[0], yf6[0]), (xf6[1], yf6[1]), (xf6[2], yf6[2]),
          (xf6[3], yf6[3]), (xf6[4], yf6[4]), (xf6[5], yf6[5]), (xf6[6], yf6[6]), (xf6[7], yf6[7]), (xf6[8], yf6[8]),
          (xf6[9], yf6[9]), (xf6[10], yf6[10]), (xf6[11], yf6[11]), (xf6[12], yf6[12])])
 
-draw_symmetrical_bird(750, 400, 1)
-draw_symmetrical_bird(650, 330, 0.8)
-draw_symmetrical_bird(775, 340, 0.5)
-draw_symmetrical_bird(675, 350, 0.5)
-draw_symmetrical_bird(475, 207, 0.5)
-draw_symmetrical_bird(475, 170, 0.5)
-draw_symmetrical_bird(425, 225, 0.5)
-draw_symmetrical_bird(415, 160, 0.5)
+    global basic_bird_list
+    basic_bird_list = move_vector_list_by(basic_bird_list, (2.5, 0))
+    draw_scaled_bird(1, 750, 400, 1)
+    draw_scaled_bird(0.8, 650, 330, False)
+    draw_scaled_bird(0.5, 775, 340, False)
+    draw_scaled_bird(0.5, 675, 350, True)
+    draw_scaled_bird(0.5, 475, 207, False)
+    draw_scaled_bird(0.5, 475, 170, True)
+    draw_scaled_bird(0.5, 425, 225, True)
+    draw_scaled_bird(0.5, 415, 160, False)
 
+
+onTimer(shift_birds, 50)
 
 run()
